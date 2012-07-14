@@ -25,16 +25,16 @@ interface Medium
     /**
      * Gets an article
      *
-     * @param mixed The unique identifier of the article
+     * @param mixed $identifier The unique identifier of the article
      *
-     * @return \Yadeo\Core\Article|null The article when found match with identifier
+     * @return array|null The articledata when found match with identifier
      */
     public function getArticle($identifier);
 
     /**
      * Gets articles
      *
-     * @param \Yadeo\Paginator An paginator instance
+     * @param \Yadeo\Paginator $paginator An paginator instance
      *
      * @return array An empty array or an array filled with \Yadeo\Core\Article articles
      */
@@ -44,7 +44,7 @@ interface Medium
      * Saves an article
      * When the article object contains an identifier it is updated otherwise it is added
      *
-     * @param \Yadeo\Storage\Storable The article to store
+     * @param \Yadeo\Storage\Storable $article The article to store
      *
      * @return bool Whether the article is saved successfully
      */
@@ -53,9 +53,9 @@ interface Medium
     /**
      * Gets a comment
      *
-     * @param mixed The unique identifier of the comment
+     * @param mixed $identifier The unique identifier of the comment
      *
-     * @return \Yadeo\Core\Comment|null The comment when found match with identifier
+     * @return array|null The comment data when found match with identifier
      */
     public function getComment($identifier);
 
@@ -63,7 +63,7 @@ interface Medium
      * Saves a comment
      * When the comment object contains an identifier it is updated otherwise it is added
      *
-     * @param \Yadeo\Storage\Storable The comment to store
+     * @param \Yadeo\Storage\Storable $data The comment to store
      *
      * @return bool Whether the comment is saved successfully
      */
