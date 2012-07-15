@@ -23,6 +23,13 @@ namespace Yadeo\Router;
 interface Route
 {
     /**
+     * Gets the name of the current route
+     *
+     * @return string The name
+     */
+    public function getName();
+
+    /**
      * Gets the target of the current route
      *
      * @return string The target
