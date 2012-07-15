@@ -24,6 +24,34 @@ namespace Yadoe\Router;
 interface Route
 {
     /**
+     * Gets the target of the current route
+     *
+     * @return string The target
+     */
+    public function getTarget();
+
+    /**
+     * Gets the URI of the current route
+     *
+     * @return string The URI
+     */
+    public function getUri();
+
+    /**
+     * Gets the method of the current route
+     *
+     * @return string The route
+     */
+    public function getMethod();
+
+    /**
+     * Gets the response type of the current route
+     *
+     * @return string The response type
+     */
+    public function getResponse();
+
+    /**
      * Verifies whether the route matches the request
      *
      * @param \Yadeo\Http\Request $request The current request object
