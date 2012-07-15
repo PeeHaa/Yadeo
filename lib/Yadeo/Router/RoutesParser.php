@@ -6,7 +6,6 @@
  *
  * @category   Yadeo
  * @package    Router
- * @subpackage Route
  * @author     Pieter Hordijk <info@pieterhordijk.com>
  * @copyright  Copyright (c) 2012 Pieter Hordijk
  * @license    http://www.opensource.org/licenses/mit-license.html  MIT License
@@ -18,7 +17,7 @@ namespace Yadeo\Router\Route;
  * The Parser interface. All classes which can parse routes should implement this interface.
  *
  * @category   Yadeo
- * @package    Storage
+ * @package    Router
  * @author     Pieter Hordijk <info@pieterhordijk.com>
  */
 interface RoutesParser extends \Iterator
