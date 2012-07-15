@@ -58,6 +58,13 @@ interface Route
     public function getResponseType();
 
     /**
+     * Gets the template of the current route
+     *
+     * @return string The template
+     */
+    public function getTemplate();
+
+    /**
      * Verifies whether the route matches the request
      *
      * @param \Yadeo\Http\Request $request The current request object
