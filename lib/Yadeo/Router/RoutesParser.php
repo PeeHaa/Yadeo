@@ -21,7 +21,7 @@ namespace Yadeo\Router\Route;
  * @package    Storage
  * @author     Pieter Hordijk <info@pieterhordijk.com>
  */
-interface Parser extends \Iterator
+interface RoutesParser extends \Iterator
 {
     /**
      * Gets the target of the current route
