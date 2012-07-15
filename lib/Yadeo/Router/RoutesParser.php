@@ -49,4 +49,11 @@ interface RoutesParser extends \Iterator
      * @return string The response type
      */
     public function getResponse();
+
+    /**
+     * Gets the template of the current route
+     *
+     * @return string The template
+     */
+    public function getTemplate();
 }
