@@ -1,0 +1,45 @@
+<phpunit bootstrap="./bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="Unit-Tests">
+            <directory>./unit</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory>../lib/Yadeo</directory>
+            <exclude>
+                <file>../lib/Yadeo/Core/Factory.php</file>
+
+                <file>../lib/Yadeo/Format/Formatter.php</file>
+
+                <file>../lib/Yadeo/Router/Engine.php</file>
+                <file>../lib/Yadeo/Router/Route.php</file>
+                <file>../lib/Yadeo/Router/RoutesParser.php</file>
+
+                <file>../lib/Yadeo/Storage/Medium.php</file>
+                <file>../lib/Yadeo/Storage/Retrievable.php</file>
+                <file>../lib/Yadeo/Storage/Storable.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+    
+    <logging>
+        <log
+            type="coverage-html"
+            target="./coverage"
+            charset="UTF-8"
+            yui="true"
+            lowUpperBound="35"
+            highLowerBound="70"
+            showUncoveredFiles="true"
+        />
+        <!--
+        <log
+            type="coverage-text"
+            target="php://stdout"
+            lowUpperBound="35"
+            highLowerBound="70"
+        />
+        -->
+    </logging>
+</phpunit>
