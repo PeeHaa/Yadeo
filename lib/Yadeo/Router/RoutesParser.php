@@ -37,6 +37,13 @@ interface RoutesParser extends \Iterator
     public function getUri();
 
     /**
+     * Gets the requirements of the current route
+     *
+     * @return string The requirements
+     */
+    public function getRequirements();
+
+    /**
      * Gets the method of the current route
      *
      * @return string The route
@@ -55,5 +62,5 @@ interface RoutesParser extends \Iterator
      *
      * @return string The template
      */
-    public function getTemplate();
+    public function getDelegationMethod();
 }
