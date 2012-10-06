@@ -1,0 +1,29 @@
+<?php if ($paginator->getTotalPages() > 1) { ?>
+  <div class="paginator">
+    <ul>
+      <?php
+      if ($paginator->getCurrentPage() > 1) {
+        echo '<li><a href="/">«</a></li>' . "\n";
+        echo '<li><a href="/page/' . ($paginator->getCurrentPage() - 1) . '">‹</a></li>' . "\n";
+      }
+      foreach($paginator->getPages() as $page) {
+        $selected = '';
+        if ($page->selected) {
+            $selected = ' class="selected"';
+        }
+
+        $a = array('', '');
+        if ($page->link) {
+            $a = array('<a href="/page/' . $page->number . '">', '</a>');
+        }
+
+        echo '<li ' . $selected . '>' . $a[0] . $page->number . $a[1] . '</li>';
+      }
+      if ($paginator->getCurrentPage() < $paginator->getTotalPages()) {
+        echo '<li><a href="/page/' . ($paginator->getCurrentPage() + 1) . '">›</a></li>' . "\n";
+        echo '<li><a href="/page/' . $paginator->getTotalPages() . '">»</a></li>' . "\n";
+      }
+      ?>
+    </ul>
+  </div>
+<?php } ?>
