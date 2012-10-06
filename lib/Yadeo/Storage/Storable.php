@@ -23,11 +23,9 @@ namespace Yadeo\Storage;
 interface Storable
 {
     /**
-     * Saves the data in our storage medium
-     *
-     * @param array $data The data to be saved
+     * Saves the object in our storage medium
      *
      * @return void
      */
-    public function save(array $data);
+    public function save();
 }
