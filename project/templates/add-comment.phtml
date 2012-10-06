@@ -1,9 +1,9 @@
 <div class="post-comment">
   <img src="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.jpg?d=mm&s=36" alt="User gravatar" title="User gravatar" class="avatar">
+  <?php include '/login.phtml'; ?>
   <form action="/<?php echo implode('/', $postCommentUriParts); ?>" method="post">
     <input type="hidden" name="current_url" value="<?php echo $currentUri; ?>">
     <textarea name="comment" placeholder="Leave a comment"></textarea>
-    <?php include '/login.phtml'; ?>
     or enter username
     <input type="text" name="username" placeholder="Anonymous posts are allowed">
     <input type="submit" name="submit" value="Post comment">
