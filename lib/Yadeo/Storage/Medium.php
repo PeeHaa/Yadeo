@@ -23,6 +23,13 @@ namespace Yadeo\Storage;
 interface Medium
 {
     /**
+     * Gets the total number of articles
+     *
+     * @return int The total number of articles
+     */
+    public function getNumberOfArticles();
+
+    /**
      * Gets an article
      *
      * @param mixed $identifier The unique identifier of the article
@@ -48,7 +55,7 @@ interface Medium
      *
      * @return bool Whether the article is saved successfully
      */
-    public function saveArticle(\Yadeo\Storage\Storable $article);
+    public function saveArticle(\Yadeo\Core\Article $article);
 
     /**
      * Gets a comment
@@ -67,5 +74,5 @@ interface Medium
      *
      * @return bool Whether the comment is saved successfully
      */
-    public function saveComment(\Yadeo\Storage\Storable $data);
+    public function saveComment(\Yadeo\Core\Comment $comment);
 }
