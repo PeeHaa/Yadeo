@@ -1,0 +1,26 @@
+<article>
+  <h1><a href="<?php echo $article->getUri(); ?>"><?php echo $article->getTitle(); ?></a></h1>
+  <?php echo $article->getParsedIntro(); ?>
+  <?php echo $article->getParsedMessage(); ?>
+  <footer>
+    <ul>
+      <li><?php echo $article->getTimestamp('d-m-Y'); ?></li>
+      <li><?php echo $article->getTimestamp('H:i'); ?></li>
+      <li>Tags: <?php echo implode(', ', $article->getTags()); ?></li>
+      <li>Comments <?php echo $article->getCommentCount(); ?></li>
+    </ul>
+  </footer>
+</article>
+<?php
+$postCommentUriParts = array(
+    'article',
+    $article->getIdentifier(),
+    $article->getSlug(),
+    'comment',
+    'post'
+);
+$currentUri = $this->request->getUri();
+?>
+<?php require '/add-comment.phtml'; ?>
+<?php $comments = $article->getComments(); ?>
+<?php require '/comments.phtml'; ?>
