@@ -1,0 +1,79 @@
+<?php
+$userTypes = array(
+    'nologin:',
+    'twitter:',
+    'facebook:',
+    'googleplus:',
+);
+?>
+
+<?php if (count($comments)) { ?>
+  <ul class="comments">
+  <?php foreach($comments as $comment) { ?>
+    <?php
+    $replyUriParts = array(
+        'article',
+        $article->getIdentifier(),
+        $article->getSlug(),
+        'comment',
+        $comment->getIdentifier(),
+        'reply',
+    );
+
+    $voteUriParts = array(
+        'article',
+        $article->getIdentifier(),
+        $article->getSlug(),
+        'comment',
+        $comment->getIdentifier(),
+        'vote',
+    );
+    $user = array (
+        'name' => 'Anonymous',
+        'link' => array('', ''),
+    );
+    if ($comment->getUser() !== null) {
+        $user['name'] = str_replace($userTypes, '', $comment->getUser());
+
+        if (strpos($comment->getUser(), 'nologin:') !== 0) {
+            $user['link'] = array('<a href="/user/' . md5($comment->getUser()) . '/' . str_replace($userTypes, '', $comment->getUser()) . '">', '</a>');
+        }
+    }
+    ?>
+    <li id="comment-<?php echo $comment->getIdentifier(); ?>">
+      <article>
+        <img src="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e.jpg?d=mm&s=36" alt="User gravatar" title="User gravatar" class="avatar">
+        <?php echo $comment->getParsedMessage(); ?>
+        <footer>
+          <ul>
+            <li><?php echo $comment->getTimestamp('d-m-Y'); ?></li>
+            <li><?php echo $comment->getTimestamp('H:i'); ?></li>
+            <li>User: <?php echo $user['link'][0]; ?><?php echo $user['name']; ?><?php echo $user['link'][1]; ?></li>
+            <li class="voting">
+              <a href="/<?php echo implode('/', $voteUriParts); ?>/up">
+                <span class="fam bullet_toggle_plus"></span>
+              </a>
+              <span class="points"><?php echo $comment->getPoints(); ?></span>
+              <a href="/<?php echo implode('/', $voteUriParts); ?>/down">
+                <span class="fam bullet_toggle_minus"></span>
+              </a>
+            </li>
+            <li class="reply"><a href="/<?php echo implode('/', $replyUriParts); ?>?current_url=<?php echo urlencode($currentUri); ?>">Reply</a></li>
+            <li><a href="#">Share</a></li>
+          </ul>
+        </footer>
+      </article>
+      <?php
+      if (count($comment->getChildren())) {
+          $comments = $comment->getChildren();
+          require '/comments.phtml';
+      }
+      ?>
+    </li>
+  <?php } ?>
+  </ul>
+<?php } else { ?>
+  <article>
+    <p>There are no comments.</p>
+  </article>
+<?php } ?>
