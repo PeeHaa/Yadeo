@@ -1,0 +1,3 @@
+[submodule "PHPoAuthLib"]
+	path = PHPoAuthLib
+	url = git@github.com:Lusitanian/PHPoAuthLib.git
