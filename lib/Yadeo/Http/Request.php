@@ -77,19 +77,49 @@ class Request
      */
     protected $method = null;
 
+    protected $getVariables;
+
+    protected $postVariables;
+
+    protected $cookies;
+
+//    protected
+
     /**
      * Creates the instance
      *
      * @param string $uri The URI
      * @param string $method The HTTP method
      */
-    public function __construct($uri, $method)
+    public function __construct(array $server, array $get, array $post, array $cookies)
     {
-        $this->uri = $uri;
-        $this->method = $method;
-        $this->uriParts = parse_url($this->uri);
+        $this->uri              = $this->buildFullUri($server);
+        $this->method           = $server['REQUEST_METHOD'];
+        $this->uriParts         = parse_url($this->uri);
+        $this->getVariables     = $get;
+        $this->postVariables    = $post;
+        $this->cookies          = $cookies;
 
         $this->parseUri();
+    }
+
+    protected function buildFullUri(array $server)
+    {
+        $normalizedProtocol = strtolower($server['SERVER_PROTOCOL']);
+
+        $uri = '';
+        $uri.= substr($normalizedProtocol, 0, strpos($normalizedProtocol, '/'));
+        if (isset($server['HTTPS']) && $server['HTTPS'] == 'on') {
+            $uri.= 's';
+        }
+        $uri.= '://';
+        $uri.= $server['SERVER_NAME'];
+        if ($server['SERVER_PORT'] != 80) {
+            $uri.= ':' . $server['SERVER_PORT'];
+        }
+        $uri.= $server['REQUEST_URI'];
+
+        return $uri;
     }
 
     /**
@@ -110,7 +140,7 @@ class Request
 
 
                 case 'path':
-                    $this->$name = explode('/', rtrim($value, '/'));
+                    $this->$name = explode('/', trim($value, '/'));
                     break;
 
                 case 'query':
@@ -223,5 +253,34 @@ class Request
     public function getFragment()
     {
         return $this->fragment;
+    }
+
+    public function getUri()
+    {
+        return $this->uri;
+    }
+
+    public function getGetVariables()
+    {
+        return $this->getVariables;
+    }
+
+    public function getPostVariables()
+    {
+        return $this->postVariables;
+    }
+
+    public function getCookies()
+    {
+        return $this->cookies;
+    }
+
+    public function getCookie($name)
+    {
+        if (array_key_exists($name, $this->cookies)) {
+            return $this->cookies[$name];
+        }
+
+        return null;
     }
 }
