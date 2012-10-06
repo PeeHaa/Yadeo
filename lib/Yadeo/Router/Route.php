@@ -44,6 +44,13 @@ interface Route
     public function getUri();
 
     /**
+     * Gets the requirements of the current route
+     *
+     * @return string The requirements
+     */
+    public function getRequirements();
+
+    /**
      * Gets the method of the current route
      *
      * @return string The route
@@ -62,7 +69,7 @@ interface Route
      *
      * @return string The template
      */
-    public function getTemplate();
+    public function getDelegationMethod();
 
     /**
      * Verifies whether the route matches the request
@@ -72,4 +79,13 @@ interface Route
      * @return boolean Whether the route matches the current request
      */
     public function doesRequestMatchRoute(\Yadeo\Http\Request $request);
+
+    /**
+     * Gets the variables defined in the URI
+     *
+     * @param \Yadeo\Http\Request $request The current request object
+     *
+     * @return array The variables defined in the URI
+     */
+    public function getVariables(\Yadeo\Http\Request $request);
 }
